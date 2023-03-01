@@ -1,0 +1,4 @@
+name: Lunar
+version: '${project.version}'
+main: me.releasedsnow.com.lunar.Lunar
+api-version: 1.19
