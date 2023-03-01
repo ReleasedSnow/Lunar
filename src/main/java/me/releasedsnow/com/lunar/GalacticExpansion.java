@@ -195,4 +195,15 @@ public class GalacticExpansion extends AirAbility implements AddonAbility {
     public String getVersion() {
         return "1.0.0";
     }
+
+    @Override
+    public String getDescription() {
+        return "Damage your enemies with expanding surges of energy, sent from space.";
+    }
+
+    @Override
+    public String getInstructions() {
+        return "Use [shift] to activate the ability, do not switch slots or the move will be cancelled.";
+    }
 }
+

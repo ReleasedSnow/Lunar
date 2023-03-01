@@ -65,7 +65,7 @@ public class LunarDash extends AirAbility implements AddonAbility {
 
 
         Vector direction = player.getLocation().getDirection();
-        direction.multiply(4);
+        direction.multiply(3);
 
 
 
@@ -182,6 +182,16 @@ public class LunarDash extends AirAbility implements AddonAbility {
     @Override
     public String getVersion() {
         return "1.0.0";
+    }
+
+    @Override
+    public String getDescription() {
+        return "Charge up lunar energy to propel yourself through the air";
+    }
+
+    @Override
+    public String getInstructions() {
+        return "Hold down [shift] until you hear a click";
     }
 }
 

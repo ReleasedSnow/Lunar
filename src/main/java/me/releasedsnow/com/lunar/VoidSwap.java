@@ -53,7 +53,6 @@ public class VoidSwap extends AirAbility implements AddonAbility {
 
         location = player.getEyeLocation();
         direction = player.getLocation().getDirection();
-        direction.multiply(1);
         distancetravelled = 0;
         hurt = new HashSet<>();
 
@@ -110,7 +109,7 @@ public class VoidSwap extends AirAbility implements AddonAbility {
         }
 
         location.add(direction);
-        distancetravelled += direction.length();
+        distancetravelled ++;
 
 
 
