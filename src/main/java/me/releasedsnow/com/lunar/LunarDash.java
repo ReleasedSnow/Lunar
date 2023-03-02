@@ -111,27 +111,25 @@ public class LunarDash extends EarthAbility implements AddonAbility {
         GeneralMethods.displayColoredParticle("cc86e3", point2, 3, 0.2, 0.2, 0.2);
 
 
-        List<Entity> entities = GeneralMethods.getEntitiesAroundPoint(player.getLocation(), 1);
+        List<Entity> entities = GeneralMethods.getEntitiesAroundPoint(player.getLocation(), 1.5);
         for (Entity entity : entities) {
                 if (entity instanceof Player) {
                     Player entityplayer = ((Player) entity).getPlayer();
                     if (entityplayer != null) {
-                        if (entity.getUniqueId() == player.getUniqueId()) {
-                            if (entityplayer.getUniqueId() != player.getUniqueId()) {
-
-                                ((Player) entity).addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, 20, 2));
-                                ((Player) entity).addPotionEffect(new PotionEffect(PotionEffectType.DARKNESS, 20, 2));
-
-                            }
-
-                            }else {
+                        if (entityplayer.getUniqueId() != player.getUniqueId()) {
                             entityplayer.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.LIGHT_PURPLE + "MoonStruck"));
-                            ((Player) entity).addPotionEffect(new PotionEffect(PotionEffectType.DARKNESS, 20, 2));
+                            entityplayer.addPotionEffect(new PotionEffect(PotionEffectType.DARKNESS, 20, 2));
+                            }else {
+                           entityplayer.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, 20, 2));
+                            entityplayer.addPotionEffect(new PotionEffect(PotionEffectType.DARKNESS, 20, 2));
+
+
 
                         }
                     }
                 }
         }
+
 
 
 
@@ -155,6 +153,7 @@ public class LunarDash extends EarthAbility implements AddonAbility {
     public void remove() {
         super.remove();
     }
+
 
     @Override
     public boolean isSneakAbility() {
