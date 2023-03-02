@@ -242,5 +242,15 @@ public class SunStrike extends AirAbility implements AddonAbility {
     public Location getLocation () {
         return location;
     }
+
+    @Override
+    public String getDescription() {
+        return "Use light from the sun to burn enemies and the ground";
+    }
+
+    @Override
+    public String getInstructions() {
+        return "Use [shift] and use your mouse cursor to direct the beam from above you";
+    }
 }
 

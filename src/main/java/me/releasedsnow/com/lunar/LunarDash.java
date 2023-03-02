@@ -4,9 +4,13 @@ import com.projectkorra.projectkorra.Element;
 import com.projectkorra.projectkorra.GeneralMethods;
 import com.projectkorra.projectkorra.ProjectKorra;
 import com.projectkorra.projectkorra.ability.AddonAbility;
-import com.projectkorra.projectkorra.ability.AirAbility;
+import com.projectkorra.projectkorra.ability.EarthAbility;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Sound;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
@@ -15,9 +19,11 @@ import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
+
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class LunarDash extends AirAbility implements AddonAbility {
+public class LunarDash extends EarthAbility implements AddonAbility {
 
     private static final long COOLDOWN = 12000;
 
@@ -35,6 +41,7 @@ public class LunarDash extends AirAbility implements AddonAbility {
 
     public LunarDash(Player player) {
         super(player);
+
 
         Location location = player.getLocation();
 
@@ -70,6 +77,7 @@ public class LunarDash extends AirAbility implements AddonAbility {
 
 
 
+
         if (height <= player.getLocation().getBlockY()) {
             player.playSound(player.getLocation(), Sound.BLOCK_GLASS_BREAK, 3, 3);
             player.setVelocity(direction);
@@ -99,13 +107,31 @@ public class LunarDash extends AirAbility implements AddonAbility {
 
 
 
-
-
-
-
         GeneralMethods.displayColoredParticle("fc65bb", point, 2, 0.2, 0.2, 0.2);
         GeneralMethods.displayColoredParticle("cc86e3", point2, 3, 0.2, 0.2, 0.2);
 
+
+        List<Entity> entities = GeneralMethods.getEntitiesAroundPoint(player.getLocation(), 1);
+        for (Entity entity : entities) {
+                if (entity instanceof Player) {
+                    Player entityplayer = ((Player) entity).getPlayer();
+                    if (entityplayer != null) {
+                        if (entity.getUniqueId() == player.getUniqueId()) {
+                            if (entityplayer.getUniqueId() != player.getUniqueId()) {
+
+                                ((Player) entity).addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, 20, 2));
+                                ((Player) entity).addPotionEffect(new PotionEffect(PotionEffectType.DARKNESS, 20, 2));
+
+                            }
+
+                            }else {
+                            entityplayer.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.LIGHT_PURPLE + "MoonStruck"));
+                            ((Player) entity).addPotionEffect(new PotionEffect(PotionEffectType.DARKNESS, 20, 2));
+
+                        }
+                    }
+                }
+        }
 
 
 

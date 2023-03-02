@@ -143,5 +143,15 @@ public class PlatformWalker extends AirAbility implements AddonAbility {
         public String getVersion() {
             return null;
         }
+
+    @Override
+    public String getDescription() {
+        return "Launch yourself into the air, and gracefully descend from the sky.";
+    }
+
+    @Override
+    public String getInstructions() {
+        return "Use [left-click]";
+    }
     }
 

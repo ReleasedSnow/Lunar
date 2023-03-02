@@ -14,6 +14,9 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionDefault;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
+import org.bukkit.util.Vector;
 
 import java.util.HashSet;
 import java.util.List;
@@ -44,6 +47,7 @@ public class GalacticExpansion extends AirAbility implements AddonAbility {
         bPlayer.addCooldown(this);
 
         targets = new HashSet<>();
+
 
         start();
 
@@ -90,29 +94,38 @@ public class GalacticExpansion extends AirAbility implements AddonAbility {
             }
 
 
+
             List<Entity> entities = GeneralMethods.getEntitiesAroundPoint(player.getLocation(), width);
 
             for (Entity entity : entities) {
                 if (entity.getUniqueId() != player.getUniqueId()) {
                     if (!targets.contains(entity)) {
-                        DamageHandler.damageEntity(entity, 2,this);
+
+                        DamageHandler.damageEntity(entity, 2, this);
                         targets.add(entity);
                     }
 
 
 
                 }
+
+
             }
-
-
 
             long duration = 6000;
             long runningTime = System.currentTimeMillis() - getStartTime();
+
 
             if (runningTime >= duration) {
                 removecooldown();
                 return;
             }
+
+
+
+
+
+
 
         }
 

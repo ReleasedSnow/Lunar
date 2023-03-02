@@ -73,6 +73,8 @@ public class VoidSwap extends AirAbility implements AddonAbility {
 
 
 
+
+
         if (!bPlayer.canBendIgnoreBindsCooldowns(this)) {
             remove();
             return;
@@ -203,6 +205,16 @@ public class VoidSwap extends AirAbility implements AddonAbility {
     @Override
     public String getVersion() {
         return "1.0.0";
+    }
+
+    @Override
+    public String getDescription() {
+        return "Swap places with your enemies with a powerful blast";
+    }
+
+    @Override
+    public String getInstructions() {
+        return "Use [left-click]";
     }
 
 

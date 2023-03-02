@@ -256,4 +256,14 @@ public class LunarRing extends AirAbility implements AddonAbility {
     public Location getLocation () {
         return location;
     }
+
+    @Override
+    public String getDescription() {
+        return "Float into the air with rings of energy, once at a certain level expel a ray of light that summons enemies towards you.";
+    }
+
+    @Override
+    public String getInstructions() {
+        return "Use [left-click] and move your cursor to direct the beam.";
+    }
 }
