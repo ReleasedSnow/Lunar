@@ -33,6 +33,8 @@ public class PlatformWalker extends AirAbility implements AddonAbility {
         public PlatformWalker(Player player) {
             super(player);
 
+            if (!bPlayer.canBend(this)) return;
+
             bPlayer.addCooldown(this);
 
 

@@ -41,17 +41,25 @@ public class LunarRing extends AirAbility implements AddonAbility {
     private Location start;
     private static final double RANGE = 7;
     private Set<Entity> hurt;
+    Boolean aBoolean;
 
 
 
     public LunarRing(Player player) {
         super(player);
+        if (!bPlayer.canBend(this)) remove();
+        aBoolean = player.getAllowFlight();
+
+
 
 
         hurt = new HashSet<>();
 
         final Location location1 = player.getLocation();
         yheight = location1.getBlockY() + 7;
+
+
+
 
 
         bPlayer.addCooldown(this);
@@ -94,6 +102,12 @@ public class LunarRing extends AirAbility implements AddonAbility {
 
 
         if (!bPlayer.getBoundAbilityName().equalsIgnoreCase("lunarring")) {
+            if (!aBoolean) {
+                player.setFlying(false);
+                player.setAllowFlight(false);
+                player.setGlowing(false);
+
+            }
             remove();
             return;
         }
@@ -107,12 +121,14 @@ public class LunarRing extends AirAbility implements AddonAbility {
 
 
 
+
+
         angle1 += 5;
         double x3 = Math.cos(Math.toRadians(angle1));
         double z3 = Math.sin(Math.toRadians(angle1));
         Location point = player.getLocation().clone().add(x3 * 1, 0, z3 * 1);
-        GeneralMethods.displayColoredParticle("200e54", point, 4, 0.2, 0.2, 0.15);
-        GeneralMethods.displayColoredParticle("1e81b0", point, 3, 0.2, 0.2, 0.15);
+        GeneralMethods.displayColoredParticle("98f6d8", point, 4, 0.2, 0.2, 0.15);
+        GeneralMethods.displayColoredParticle("109ca1", point, 3, 0.2, 0.2, 0.15);
 
 
 
@@ -141,10 +157,17 @@ public class LunarRing extends AirAbility implements AddonAbility {
         long runningTime = System.currentTimeMillis() - getStartTime();
 
         if(runningTime >= duration) {
+           if (aBoolean) {
+               player.setGlowing(false);
+               player.setFlying(false);
+               player.setAllowFlight(true);
+               player.removePotionEffect(PotionEffectType.SLOW);
+           }
+
+
             player.setGlowing(false);
-            player.setGravity(true);
-            player.setAllowFlight(false);
             player.setFlying(false);
+            player.setAllowFlight(false);
             player.removePotionEffect(PotionEffectType.SLOW);
             remove();
             return;

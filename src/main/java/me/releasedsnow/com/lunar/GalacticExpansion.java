@@ -44,6 +44,8 @@ public class GalacticExpansion extends AirAbility implements AddonAbility {
     public GalacticExpansion(Player player) {
         super(player);
 
+        if (!bPlayer.canBend(this)) return;
+
         bPlayer.addCooldown(this);
 
         targets = new HashSet<>();

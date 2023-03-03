@@ -11,6 +11,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.LightningStrike;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
@@ -41,6 +42,9 @@ public class LunarDash extends EarthAbility implements AddonAbility {
 
     public LunarDash(Player player) {
         super(player);
+
+        if (!bPlayer.canBend(this)) return;
+
 
 
         Location location = player.getLocation();
@@ -119,9 +123,10 @@ public class LunarDash extends EarthAbility implements AddonAbility {
                         if (entityplayer.getUniqueId() != player.getUniqueId()) {
                             entityplayer.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.LIGHT_PURPLE + "MoonStruck"));
                             entityplayer.addPotionEffect(new PotionEffect(PotionEffectType.DARKNESS, 20, 2));
-                            }else {
+                            LightningStrike lightningStrike = entityplayer.getWorld().strikeLightningEffect(entityplayer.getLocation());
+                        }else {
                            entityplayer.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, 20, 2));
-                            entityplayer.addPotionEffect(new PotionEffect(PotionEffectType.DARKNESS, 20, 2));
+
 
 
 

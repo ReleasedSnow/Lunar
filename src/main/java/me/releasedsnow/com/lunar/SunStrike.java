@@ -46,6 +46,8 @@ public class SunStrike extends AirAbility implements AddonAbility {
     public SunStrike(Player player) {
         super(player);
 
+        if (!bPlayer.canBend(this)) return;
+
         hurt = new HashSet<>();
 
 

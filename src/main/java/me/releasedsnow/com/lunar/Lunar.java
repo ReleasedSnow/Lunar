@@ -17,6 +17,9 @@ public final class Lunar extends JavaPlugin {
         getPlugin().getServer().getPluginManager().registerEvents(new AbilityListener(), plugin);
         CoreAbility.registerPluginAbilities(this, "me.releasedsnow.com.lunar");
         element = new Element("Lunar", Element.ElementType.BENDING, ProjectKorra.plugin) {
+
+
+
             @Override
             public ChatColor getColor() {
                 return ChatColor.of("#8B62F3");
@@ -28,6 +31,7 @@ public final class Lunar extends JavaPlugin {
     public static Element ele() {
         return element;
     }
+
 
     private static Lunar getPlugin() {
         return plugin;

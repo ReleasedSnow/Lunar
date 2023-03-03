@@ -10,6 +10,7 @@ import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Mob;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.permissions.Permission;
@@ -128,6 +129,9 @@ public class VoidSwap extends AirAbility implements AddonAbility {
         List<Entity> targets = GeneralMethods.getEntitiesAroundPoint(location, 1);
         for (Entity target : targets) {
             if (target.getUniqueId() == player.getUniqueId()) {
+                continue;
+            }
+            if (!(target instanceof Mob || target instanceof Player)) {
                 continue;
             }
 
