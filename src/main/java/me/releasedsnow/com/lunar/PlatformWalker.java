@@ -111,7 +111,7 @@ public class PlatformWalker extends AirAbility implements AddonAbility {
 
         @Override
         public Element getElement() {
-            return Lunar.element;
+            return Lunar.ele();
         }
 
         @Override
