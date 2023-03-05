@@ -30,8 +30,8 @@ public class AbilityListener implements Listener {
         } else if (bound.equalsIgnoreCase("lunarring")) {
             new LunarRing(player);
 
-        } else if (bound.equalsIgnoreCase("platformwalker")) {
-            new PlatformWalker(player);
+        } else if (bound.equalsIgnoreCase("moonwalk")) {
+            new MoonWalk(player);
 
         }
         }
