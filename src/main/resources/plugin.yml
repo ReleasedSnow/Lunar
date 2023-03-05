@@ -1,6 +1,6 @@
 name: Lunar
 version: '${project.version}'
 main: me.releasedsnow.com.lunar.Lunar
-api-version: 1.19
+api-version: 1.17
 depend:
   - ProjectKorra

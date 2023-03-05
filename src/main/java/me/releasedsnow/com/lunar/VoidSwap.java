@@ -26,10 +26,10 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class VoidSwap extends AirAbility implements AddonAbility {
 
-    private static final double DAMAGE = 1;
+    private static final double DAMAGE = 2;
 
-    private static final double RANGE = 9;
-    private static final long COOLDOWN = 5000;
+    private static final double RANGE = 15;
+    private static final long COOLDOWN = 3000;
 
 
 
@@ -45,6 +45,11 @@ public class VoidSwap extends AirAbility implements AddonAbility {
 
     public VoidSwap(Player player) {
         super(player);
+        if (!bPlayer.getBoundAbilityName().equalsIgnoreCase("voidswap")) {
+            bPlayer.addCooldown(this);
+            remove();
+            return;
+        }
 
         if (!bPlayer.canBend(this)) return;
 
@@ -141,7 +146,6 @@ public class VoidSwap extends AirAbility implements AddonAbility {
             Location location2 = player.getLocation();
             player.teleport(target.getLocation());
             target.teleport(location2);
-            player.addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION, 50, 0));
             remove();
             return;
 

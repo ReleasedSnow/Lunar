@@ -6,13 +6,12 @@ import com.projectkorra.projectkorra.ProjectKorra;
 import com.projectkorra.projectkorra.ability.AddonAbility;
 import com.projectkorra.projectkorra.ability.AirAbility;
 import com.projectkorra.projectkorra.util.DamageHandler;
-import com.projectkorra.projectkorra.util.TempBlock;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Mob;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.permissions.Permission;
@@ -21,18 +20,16 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
-import java.util.HashSet;
+
 import java.util.List;
-import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class LunarRing extends AirAbility implements AddonAbility {
 
-    private static final long COOLDOWN = 15000;
+    private static final long COOLDOWN = 10000;
     private AbilityListener listener;
 
     private double angle1;
-    private final long revert = 2500;
     public static Location location;
     private Permission permission;
     int yheight;
@@ -40,7 +37,6 @@ public class LunarRing extends AirAbility implements AddonAbility {
     private Vector direction;
     private Location start;
     private static final double RANGE = 7;
-    private Set<Entity> hurt;
     Boolean aBoolean;
 
 
@@ -53,10 +49,9 @@ public class LunarRing extends AirAbility implements AddonAbility {
 
 
 
-        hurt = new HashSet<>();
 
         final Location location1 = player.getLocation();
-        yheight = location1.getBlockY() + 7;
+        yheight = location1.getBlockY() + 6;
 
 
 
@@ -138,14 +133,13 @@ public class LunarRing extends AirAbility implements AddonAbility {
             player.setAllowFlight(true);
             player.setFlying(true);
             createBeam();
-            player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_FALLING, 50, 0 ));
             player.setGlowing(true);
-            player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 50, 10));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 50, 4));
             if (!player.isFlying()) {
                 player.setFlying(true);
             }
         }else {
-            player.setVelocity(new Vector(0, 0.1, 0));
+            player.setVelocity(new Vector(0, 0.2, 0));
 
 
         }
@@ -153,24 +147,29 @@ public class LunarRing extends AirAbility implements AddonAbility {
 
 
 
-        long duration = 10000;
+        long duration = 6500;
         long runningTime = System.currentTimeMillis() - getStartTime();
 
         if(runningTime >= duration) {
+            player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_FALLING, 50, 0 ));
            if (aBoolean) {
                player.setGlowing(false);
                player.setFlying(false);
                player.setAllowFlight(true);
-               player.removePotionEffect(PotionEffectType.SLOW);
+               player.removePotionEffect(PotionEffectType.SPEED);
+               bPlayer.addCooldown(this);
            }
 
 
             player.setGlowing(false);
             player.setFlying(false);
             player.setAllowFlight(false);
-            player.removePotionEffect(PotionEffectType.SLOW);
+            player.removePotionEffect(PotionEffectType.SPEED);
+            bPlayer.addCooldown(this);
             remove();
             return;
+
+
 
         }
 
@@ -193,13 +192,7 @@ public class LunarRing extends AirAbility implements AddonAbility {
                 for (Location loc : location1) {
                     Block block = loc.getBlock();
                     if (!block.getType().isAir()) {
-                        if (!TempBlock.isTempBlock(block)) {
-                            if (!(block.getType() == Material.WATER)) {
-                                System.out.println(block);
-                                System.out.println(loc);
-                                new TempBlock(loc.getBlock(), Material.BLACK_CONCRETE_POWDER.createBlockData(), revert);
-                            }
-                        }
+                        player.getWorld().spawnParticle(Particle.SNOWFLAKE, loc, 2, 0.1, 0.1, 0.1, 0.1f);
 
 
                     }
@@ -215,17 +208,15 @@ public class LunarRing extends AirAbility implements AddonAbility {
                 GeneralMethods.displayColoredParticle("023e85", start, 1, 0.2, 0.2, 0.2);
 
                 if (ThreadLocalRandom.current().nextInt(50) == 0) {
-                    player.spawnParticle(Particle.FIREWORKS_SPARK, start, 1, 0.3, 0.23, 0.25);
+                    player.spawnParticle(Particle.FIREWORKS_SPARK, start, 1, 0.15, 0.1,  0.15, 0.1f);
 
                 }
                 List<Entity> entities = GeneralMethods.getEntitiesAroundPoint(start, 2);
                 for (Entity entity : entities) {
-                    if (!hurt.contains(entity)) {
-                        entity.teleport(player.getLocation());
-                        hurt.add(entity);
-                        if (entity instanceof Player) {
-                            DamageHandler.damageEntity(entity, 2, this);
-                        }
+                        if (entity instanceof Player || entity instanceof Mob) {
+                            if (getRunningTicks() % 20 == 0) {
+                                DamageHandler.damageEntity(entity, 0.5, this);
+                            }
 
                     }
 
@@ -250,7 +241,6 @@ public class LunarRing extends AirAbility implements AddonAbility {
 
     @Override
     public void remove () {
-        hurt.clear();
         super.remove();
     }
 

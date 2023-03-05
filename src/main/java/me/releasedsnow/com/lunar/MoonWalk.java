@@ -25,7 +25,7 @@ import java.util.List;
 public class MoonWalk extends AirAbility implements AddonAbility {
 
 
-    private final static long COOlDOWN = 10000;
+    private final static long COOlDOWN = 7000;
 
     public Listener listener;
     public Permission permission;
@@ -71,7 +71,7 @@ public class MoonWalk extends AirAbility implements AddonAbility {
             }
         }
 
-        long duration = 10000;
+        long duration = 7500;
         long runningTime = System.currentTimeMillis() - getStartTime();
 
         if (runningTime >= duration) {

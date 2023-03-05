@@ -31,7 +31,7 @@ public class SunStrike extends AirAbility implements AddonAbility {
 
     Location sphere = player.getLocation();
 
-    private static final long COOLDOWN = 20000;
+    private static final long COOLDOWN = 8000;
     private Listener listener;
 
     public static Location location;
@@ -127,10 +127,11 @@ public class SunStrike extends AirAbility implements AddonAbility {
 
 
 
-        long duration = 10000;
+        long duration = 7000;
         long runningTime = System.currentTimeMillis() - getStartTime();
 
         if(runningTime >= duration) {
+            bPlayer.addCooldown(this);
             remove();
             return;
 
@@ -161,7 +162,7 @@ public class SunStrike extends AirAbility implements AddonAbility {
                             System.out.println(loc);
                             long REVERT = 10000;
 
-                            new TempBlock(loc.getBlock(), Material.ORANGE_CONCRETE.createBlockData(), REVERT);
+                            new TempBlock(loc.getBlock(), Material.YELLOW_GLAZED_TERRACOTTA.createBlockData(), REVERT);
 
                         }
                     }
@@ -187,11 +188,11 @@ public class SunStrike extends AirAbility implements AddonAbility {
                 if (!hurt.contains(entity)) {
                     if (entity instanceof Player) {
                         ((Player) entity).addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 30, 2));
-                        entity.setFireTicks(5000);
+                        entity.setFireTicks(200);
                         DamageHandler.damageEntity(entity, 3, this);
                         hurt.add(entity);
                     }
-                    entity.setFireTicks(5000);
+                    entity.setFireTicks(200);
                     DamageHandler.damageEntity(entity, 3, this);
                     hurt.add(entity);
 

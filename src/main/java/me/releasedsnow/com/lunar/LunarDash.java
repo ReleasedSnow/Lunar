@@ -122,7 +122,7 @@ public class LunarDash extends EarthAbility implements AddonAbility {
                     if (entityplayer != null) {
                         if (entityplayer.getUniqueId() != player.getUniqueId()) {
                             entityplayer.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.LIGHT_PURPLE + "MoonStruck"));
-                            entityplayer.addPotionEffect(new PotionEffect(PotionEffectType.DARKNESS, 20, 2));
+                            entityplayer.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20, 2));
                             LightningStrike lightningStrike = entityplayer.getWorld().strikeLightningEffect(entityplayer.getLocation());
                         }else {
                            entityplayer.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, 20, 2));
@@ -151,7 +151,7 @@ public class LunarDash extends EarthAbility implements AddonAbility {
 
     @Override
     public Element getElement() {
-        return Lunar.element;
+        return Lunar.ele();
     }
 
     @Override

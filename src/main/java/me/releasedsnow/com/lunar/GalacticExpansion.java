@@ -31,7 +31,7 @@ public class GalacticExpansion extends AirAbility implements AddonAbility {
     private Listener listener;
     private Permission permission;
 
-    private static final long COOLDOWN = 10000;
+    private static final long COOLDOWN = 8000;
 
     double multiply;
     private Set<Entity> targets;
@@ -191,7 +191,7 @@ public class GalacticExpansion extends AirAbility implements AddonAbility {
 
     @Override
     public Element getElement() {
-        return Lunar.element;
+        return Lunar.ele();
     }
 
     @Override
