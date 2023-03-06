@@ -113,7 +113,7 @@ public class SunStrike extends AirAbility implements AddonAbility {
                 double x = Math.cos(a) * radius;
                 double z = Math.sin(a) * radius;
                 sphere.add(x, y, z);
-                if (ThreadLocalRandom.current().nextInt(2) == 0) {
+                if (ThreadLocalRandom.current().nextInt(4) == 0) {
                     GeneralMethods.displayColoredParticle("e6a638", sphere, 1, 0.25, 0.25, 0.25);
                     GeneralMethods.displayColoredParticle("e67538", sphere, 1, 0.25, 0.25, 0.25);
                 }
@@ -127,7 +127,7 @@ public class SunStrike extends AirAbility implements AddonAbility {
 
 
 
-        long duration = 7000;
+        long duration = 5000;
         long runningTime = System.currentTimeMillis() - getStartTime();
 
         if(runningTime >= duration) {
@@ -192,7 +192,7 @@ public class SunStrike extends AirAbility implements AddonAbility {
                         DamageHandler.damageEntity(entity, 3, this);
                         hurt.add(entity);
                     }
-                    entity.setFireTicks(200);
+                    entity.setFireTicks(50);
                     DamageHandler.damageEntity(entity, 3, this);
                     hurt.add(entity);
 
@@ -212,7 +212,7 @@ public class SunStrike extends AirAbility implements AddonAbility {
 
     @Override
     public Element getElement () {
-        return Lunar.element;
+        return Lunar.ele();
     }
 
     @Override

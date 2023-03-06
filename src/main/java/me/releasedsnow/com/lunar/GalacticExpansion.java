@@ -14,10 +14,6 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionDefault;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
-import org.bukkit.util.Vector;
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -92,27 +88,21 @@ public class GalacticExpansion extends AirAbility implements AddonAbility {
                 player.getWorld().playSound(player.getLocation(), Sound.ITEM_AXE_STRIP, 3, 3);
                 multiply += 0.08;
                 width += 0.08;
+                List<Entity> entities = GeneralMethods.getEntitiesAroundPoint(player.getLocation(), width);
 
-            }
-
-
-
-            List<Entity> entities = GeneralMethods.getEntitiesAroundPoint(player.getLocation(), width);
-
-            for (Entity entity : entities) {
-                if (entity.getUniqueId() != player.getUniqueId()) {
-                    if (!targets.contains(entity)) {
-
-                        DamageHandler.damageEntity(entity, 2, this);
-                        targets.add(entity);
+                for (Entity entity : entities) {
+                    if (entity.getUniqueId() != player.getUniqueId()) {
+                            DamageHandler.damageEntity(entity, 2, this);
                     }
-
 
 
                 }
 
-
             }
+
+
+
+
 
             long duration = 6000;
             long runningTime = System.currentTimeMillis() - getStartTime();

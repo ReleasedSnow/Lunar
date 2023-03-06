@@ -6,12 +6,10 @@ import com.projectkorra.projectkorra.ProjectKorra;
 import com.projectkorra.projectkorra.ability.AddonAbility;
 import com.projectkorra.projectkorra.ability.AirAbility;
 import com.projectkorra.projectkorra.util.TempBlock;
-import com.sun.tools.javac.comp.Enter;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.block.Block;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
@@ -50,28 +48,45 @@ public class MoonWalk extends AirAbility implements AddonAbility {
             remove();
             return;
         }
-        Location starts = player.getLocation();
-        int feet = player.getLocation().getBlockY() - 2;
-        starts.setY(feet);
 
-        if (starts.getBlock().getType().isAir()) {
-            List<Location> locations = GeneralMethods.getCircle(starts, 2, 1, false, false, 0);
-            for (Location location1 : locations) {
-                Block underneath = location1.getBlock();
-                location = underneath.getLocation();
-                if (!underneath.getType().isSolid()) {
-                    if (!TempBlock.isTempBlock(underneath)) {
-                        new TempBlock(underneath, Material.BLUE_STAINED_GLASS.createBlockData(), revert);
-                        player.spawnParticle(Particle.ENCHANTMENT_TABLE, location1, 2);
-                        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 50, 3));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION, 1, 20));
 
+
+        long longest = 1000;
+        long start = System.currentTimeMillis() - getStartTime();
+
+        if (start >= longest) {
+            player.removePotionEffect(PotionEffectType.LEVITATION);
+
+
+            Location starts = player.getLocation();
+            int feet = player.getLocation().getBlockY() - 2;
+            starts.setY(feet);
+
+            if (starts.getBlock().getType().isAir()) {
+                List<Location> locations = GeneralMethods.getCircle(starts, 2, 1, false, false, 0);
+                for (Location location1 : locations) {
+                    Block underneath = location1.getBlock();
+                    location = underneath.getLocation();
+                    if (!underneath.getType().isSolid()) {
+                        if (!TempBlock.isTempBlock(underneath)) {
+                            new TempBlock(underneath, Material.BLUE_STAINED_GLASS.createBlockData(), revert);
+                            player.spawnParticle(Particle.ENCHANTMENT_TABLE, location1, 2);
+                            player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 50, 5));
+
+                        }
                     }
-                }
 
+                }
             }
+
+
+
+
         }
 
-        long duration = 7500;
+
+        long duration = 7000;
         long runningTime = System.currentTimeMillis() - getStartTime();
 
         if (runningTime >= duration) {

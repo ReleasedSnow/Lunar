@@ -37,14 +37,14 @@ public class LunarRing extends AirAbility implements AddonAbility {
     private Vector direction;
     private Location start;
     private static final double RANGE = 7;
-    Boolean aBoolean;
 
 
 
     public LunarRing(Player player) {
         super(player);
-        if (!bPlayer.canBend(this)) remove();
-        aBoolean = player.getAllowFlight();
+
+
+        if (!bPlayer.canBend(this)) return;
 
 
 
@@ -97,15 +97,13 @@ public class LunarRing extends AirAbility implements AddonAbility {
 
 
         if (!bPlayer.getBoundAbilityName().equalsIgnoreCase("lunarring")) {
-            if (!aBoolean) {
-                player.setFlying(false);
-                player.setAllowFlight(false);
-                player.setGlowing(false);
-
-            }
+            player.setAllowFlight(false);
+            player.setFlying(false);
+            player.setGlowing(false);
             remove();
             return;
         }
+
 
         if (!bPlayer.canBendIgnoreBindsCooldowns(this)) {
             remove();
@@ -147,18 +145,11 @@ public class LunarRing extends AirAbility implements AddonAbility {
 
 
 
-        long duration = 6500;
+        long duration = 6000;
         long runningTime = System.currentTimeMillis() - getStartTime();
 
         if(runningTime >= duration) {
             player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_FALLING, 50, 0 ));
-           if (aBoolean) {
-               player.setGlowing(false);
-               player.setFlying(false);
-               player.setAllowFlight(true);
-               player.removePotionEffect(PotionEffectType.SPEED);
-               bPlayer.addCooldown(this);
-           }
 
 
             player.setGlowing(false);
@@ -213,11 +204,12 @@ public class LunarRing extends AirAbility implements AddonAbility {
                 }
                 List<Entity> entities = GeneralMethods.getEntitiesAroundPoint(start, 2);
                 for (Entity entity : entities) {
+                    if (entity.getUniqueId() != player.getUniqueId()) {
                         if (entity instanceof Player || entity instanceof Mob) {
                             if (getRunningTicks() % 20 == 0) {
                                 DamageHandler.damageEntity(entity, 0.5, this);
                             }
-
+                        }
                     }
 
                 }
