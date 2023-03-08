@@ -26,7 +26,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class LunarDash extends EarthAbility implements AddonAbility {
 
-    private static final long COOLDOWN = 12000;
+    private static final long COOLDOWN = 8000;
 
     private Listener listener;
     private Permission permission;
@@ -96,8 +96,8 @@ public class LunarDash extends EarthAbility implements AddonAbility {
 
 
         angle += 4;
-        height -= 0.1;
-        height2 -= 0.1;
+        height -= 0.15;
+        height2 -= 0.15;
         angle2 = angle2 + 180;
         angle2 += 4;
 

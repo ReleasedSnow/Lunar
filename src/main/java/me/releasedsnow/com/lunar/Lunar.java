@@ -4,15 +4,19 @@ import com.projectkorra.projectkorra.Element;
 import com.projectkorra.projectkorra.ProjectKorra;
 import com.projectkorra.projectkorra.ability.CoreAbility;
 import net.md_5.bungee.api.ChatColor;
+import org.bukkit.permissions.Permission;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Lunar extends JavaPlugin {
 
     private static Lunar plugin;
     public static Element element;
+    Permission permission;
 
     @Override
     public void onEnable() {
+
+
         plugin = this;
         getPlugin().getServer().getPluginManager().registerEvents(new AbilityListener(), plugin);
         CoreAbility.registerPluginAbilities(this, "me.releasedsnow.com.lunar");

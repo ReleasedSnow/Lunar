@@ -17,6 +17,7 @@ import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.util.Vector;
 
 import java.util.List;
 
@@ -49,8 +50,12 @@ public class MoonWalk extends AirAbility implements AddonAbility {
             return;
         }
 
-        player.addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION, 1, 20));
 
+        Vector vector = new Vector(0, 0.75,0);
+        vector.multiply(3);
+        if (getRunningTicks() % 2000 == 0) {
+            player.setVelocity(vector);
+        }
 
         long longest = 1000;
         long start = System.currentTimeMillis() - getStartTime();
@@ -86,7 +91,7 @@ public class MoonWalk extends AirAbility implements AddonAbility {
         }
 
 
-        long duration = 7000;
+        long duration = 4000;
         long runningTime = System.currentTimeMillis() - getStartTime();
 
         if (runningTime >= duration) {

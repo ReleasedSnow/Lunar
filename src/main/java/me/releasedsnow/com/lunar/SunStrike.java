@@ -127,7 +127,7 @@ public class SunStrike extends AirAbility implements AddonAbility {
 
 
 
-        long duration = 5000;
+        long duration = 3000;
         long runningTime = System.currentTimeMillis() - getStartTime();
 
         if(runningTime >= duration) {

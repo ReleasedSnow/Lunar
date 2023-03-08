@@ -84,7 +84,7 @@ public class GalacticExpansion extends AirAbility implements AddonAbility {
                 }
                 sphere.subtract(x, y, z);
             }
-            if (getRunningTicks() % 20 == 0) {
+            if (getRunningTicks() % 15 == 0) {
                 player.getWorld().playSound(player.getLocation(), Sound.ITEM_AXE_STRIP, 3, 3);
                 multiply += 0.08;
                 width += 0.08;
@@ -92,7 +92,9 @@ public class GalacticExpansion extends AirAbility implements AddonAbility {
 
                 for (Entity entity : entities) {
                     if (entity.getUniqueId() != player.getUniqueId()) {
-                            DamageHandler.damageEntity(entity, 2, this);
+                        if (getRunningTicks() % 20 == 0) {
+                            DamageHandler.damageEntity(entity, 0.5, this);
+                        }
                     }
 
 
@@ -104,7 +106,7 @@ public class GalacticExpansion extends AirAbility implements AddonAbility {
 
 
 
-            long duration = 6000;
+            long duration = 5000;
             long runningTime = System.currentTimeMillis() - getStartTime();
 
 

@@ -137,7 +137,7 @@ public class LunarRing extends AirAbility implements AddonAbility {
                 player.setFlying(true);
             }
         }else {
-            player.setVelocity(new Vector(0, 0.2, 0));
+            player.setVelocity(new Vector(0, 0.30, 0));
 
 
         }
@@ -145,7 +145,7 @@ public class LunarRing extends AirAbility implements AddonAbility {
 
 
 
-        long duration = 6000;
+        long duration = 4000;
         long runningTime = System.currentTimeMillis() - getStartTime();
 
         if(runningTime >= duration) {

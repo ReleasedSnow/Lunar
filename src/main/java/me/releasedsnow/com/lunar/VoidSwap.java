@@ -15,8 +15,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionDefault;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
 import java.util.HashSet;
@@ -28,7 +26,7 @@ public class VoidSwap extends AirAbility implements AddonAbility {
 
     private static final double DAMAGE = 2;
 
-    private static final double RANGE = 15;
+    private static final double RANGE = 17;
     private static final long COOLDOWN = 3000;
 
 
@@ -45,11 +43,7 @@ public class VoidSwap extends AirAbility implements AddonAbility {
 
     public VoidSwap(Player player) {
         super(player);
-        if (!bPlayer.getBoundAbilityName().equalsIgnoreCase("voidswap")) {
-            bPlayer.addCooldown(this);
-            remove();
-            return;
-        }
+
 
         if (!bPlayer.canBend(this)) return;
 
@@ -104,9 +98,9 @@ public class VoidSwap extends AirAbility implements AddonAbility {
         effectTargets();
 
 
-        GeneralMethods.displayColoredParticle("052f89", location, 4, 0.2, 0.4, 0.3);
-        GeneralMethods.displayColoredParticle("6d05a0", location, 4, 0.2, 0.4, 0.2);
-        GeneralMethods.displayColoredParticle("9a73e2", location, 3, 0.2, 0.4, 0.2);
+        GeneralMethods.displayColoredParticle("6f9ddb", location, 4, 0.2, 0.4, 0.3);
+        GeneralMethods.displayColoredParticle("9bbfed", location, 4, 0.2, 0.4, 0.2);
+
 
 
 
