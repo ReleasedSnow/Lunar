@@ -24,7 +24,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class VoidSwap extends AirAbility implements AddonAbility {
 
-    private static final double DAMAGE = 2;
+    private static final double DAMAGE = 3;
 
     private static final double RANGE = 17;
     private static final long COOLDOWN = 3000;
@@ -147,7 +147,7 @@ public class VoidSwap extends AirAbility implements AddonAbility {
     }
     @Override
     public Element getElement() {
-        return Lunar.element;
+        return Lunar.ele();
     }
 
     @Override

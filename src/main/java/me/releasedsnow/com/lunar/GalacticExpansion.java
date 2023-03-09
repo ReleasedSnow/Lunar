@@ -14,6 +14,8 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionDefault;
+import org.bukkit.util.Vector;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -79,8 +81,8 @@ public class GalacticExpansion extends AirAbility implements AddonAbility {
                 double z = Math.sin(a) * radius;
                 sphere.add(x, y, z);
                 if (ThreadLocalRandom.current().nextInt(2) == 0) {
-                    GeneralMethods.displayColoredParticle("c168f6", sphere, 1, 0.25, 0.25, 0.25);
-                    GeneralMethods.displayColoredParticle("61477b", sphere, 1, 0.25, 0.25, 0.25);
+                    GeneralMethods.displayColoredParticle("f6927d", sphere, 1, 0.25, 0.25, 0.25);
+                    GeneralMethods.displayColoredParticle("c5a9ad", sphere, 1, 0.25, 0.25, 0.25);
                 }
                 sphere.subtract(x, y, z);
             }
@@ -88,17 +90,21 @@ public class GalacticExpansion extends AirAbility implements AddonAbility {
                 player.getWorld().playSound(player.getLocation(), Sound.ITEM_AXE_STRIP, 3, 3);
                 multiply += 0.08;
                 width += 0.08;
-                List<Entity> entities = GeneralMethods.getEntitiesAroundPoint(player.getLocation(), width);
 
-                for (Entity entity : entities) {
-                    if (entity.getUniqueId() != player.getUniqueId()) {
-                        if (getRunningTicks() % 20 == 0) {
-                            DamageHandler.damageEntity(entity, 0.5, this);
-                        }
+            }
+
+            List<Entity> entities = GeneralMethods.getEntitiesAroundPoint(player.getLocation(), width);
+
+            for (Entity entity : entities) {
+                if (entity.getUniqueId() != player.getUniqueId()) {
+                    if (getRunningTicks() % 15 == 0) {
+                        DamageHandler.damageEntity(entity, 0.25, this);
+                        Vector direction = entity.getLocation().getDirection().multiply(-1.5);
+                        entity.setVelocity(direction);
+
                     }
-
-
                 }
+
 
             }
 

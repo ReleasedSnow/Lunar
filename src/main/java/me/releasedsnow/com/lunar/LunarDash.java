@@ -11,7 +11,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.LightningStrike;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
@@ -96,8 +95,8 @@ public class LunarDash extends EarthAbility implements AddonAbility {
 
 
         angle += 4;
-        height -= 0.15;
-        height2 -= 0.15;
+        height -= 0.2;
+        height2 -= 0.2;
         angle2 = angle2 + 180;
         angle2 += 4;
 

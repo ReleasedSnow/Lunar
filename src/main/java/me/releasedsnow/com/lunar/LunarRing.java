@@ -145,7 +145,7 @@ public class LunarRing extends AirAbility implements AddonAbility {
 
 
 
-        long duration = 4000;
+        long duration = 3500;
         long runningTime = System.currentTimeMillis() - getStartTime();
 
         if(runningTime >= duration) {
@@ -228,7 +228,7 @@ public class LunarRing extends AirAbility implements AddonAbility {
 
     @Override
     public Element getElement () {
-        return Lunar.element;
+        return Lunar.ele();
     }
 
     @Override
