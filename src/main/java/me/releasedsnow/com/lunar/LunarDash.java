@@ -221,5 +221,7 @@ public class LunarDash extends EarthAbility implements AddonAbility {
     public String getInstructions() {
         return "Hold down [shift] until you hear a click";
     }
+
+
 }
 

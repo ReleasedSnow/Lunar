@@ -87,7 +87,7 @@ public class GalacticExpansion extends AirAbility implements AddonAbility {
                 sphere.subtract(x, y, z);
             }
             if (getRunningTicks() % 15 == 0) {
-                player.getWorld().playSound(player.getLocation(), Sound.ITEM_AXE_STRIP, 3, 3);
+                player.getWorld().playSound(player.getLocation(), Sound.BLOCK_CONDUIT_AMBIENT, 3, 3);
                 multiply += 0.08;
                 width += 0.08;
 

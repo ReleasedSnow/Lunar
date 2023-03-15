@@ -53,7 +53,9 @@ public class AbilityListener implements Listener {
 
             } else if (bound.equalsIgnoreCase("galacticexpansion")) {
                 new GalacticExpansion(player);
-            }
+            }else  if (bound.equalsIgnoreCase("cosmiccollide")) {
+                new CosmicCollide(player);
+        }
         }
     }
 }

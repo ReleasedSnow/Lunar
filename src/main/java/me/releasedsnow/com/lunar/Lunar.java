@@ -11,7 +11,6 @@ public final class Lunar extends JavaPlugin {
 
     private static Lunar plugin;
     public static Element element;
-    Permission permission;
 
     @Override
     public void onEnable() {

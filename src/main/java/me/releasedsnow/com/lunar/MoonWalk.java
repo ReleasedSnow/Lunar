@@ -51,7 +51,7 @@ public class MoonWalk extends AirAbility implements AddonAbility {
         }
 
 
-        Vector vector = new Vector(0, 0.75,0);
+        Vector vector = new Vector(0, 0.5,0);
         vector.multiply(3);
         if (getRunningTicks() % 2000 == 0) {
             player.setVelocity(vector);
