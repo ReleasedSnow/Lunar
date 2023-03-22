@@ -28,7 +28,7 @@ public class LunarDash extends EarthAbility implements AddonAbility {
     private static final long COOLDOWN = 8000;
 
     private Listener listener;
-    private Permission permission;
+    private Permission permission = Lunar.permission();
 
 
     private double angle;
@@ -120,7 +120,7 @@ public class LunarDash extends EarthAbility implements AddonAbility {
                     Player entityplayer = ((Player) entity).getPlayer();
                     if (entityplayer != null) {
                         if (entityplayer.getUniqueId() != player.getUniqueId()) {
-                            entityplayer.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.LIGHT_PURPLE + "MoonStruck"));
+                            entity.sendMessage(ChatColor.LIGHT_PURPLE + "MoonStruck");
                             entityplayer.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20, 2));
                         }else {
                            entityplayer.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, 20, 2));
@@ -189,15 +189,12 @@ public class LunarDash extends EarthAbility implements AddonAbility {
 
         this.listener = new AbilityListener();
         ProjectKorra.plugin.getServer().getPluginManager().registerEvents(listener, ProjectKorra.plugin);
-        permission = new Permission("bending.ability.effects");
-        permission.setDefault(PermissionDefault.OP);
         ProjectKorra.plugin.getServer().getPluginManager().addPermission(permission);
     }
 
     @Override
     public void stop() {
         HandlerList.unregisterAll(listener);
-        ProjectKorra.plugin.getServer().getPluginManager().removePermission(permission);
 
 
     }

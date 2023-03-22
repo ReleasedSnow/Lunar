@@ -12,6 +12,8 @@ public final class Lunar extends JavaPlugin {
     private static Lunar plugin;
     public static Element element;
 
+    public static Permission permission;
+
     @Override
     public void onEnable() {
 
@@ -35,11 +37,20 @@ public final class Lunar extends JavaPlugin {
         return element;
     }
 
+    public static Permission permission() {
+        permission = new Permission("bending.lunar");
+        return permission;
+
+
+    }
+
 
     private static Lunar getPlugin() {
         return plugin;
     }
 
-
-
+    @Override
+    public void onDisable() {
+        ProjectKorra.plugin.getServer().getPluginManager().removePermission(permission());
+    }
 }

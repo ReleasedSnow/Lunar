@@ -32,7 +32,7 @@ public class VoidSwap extends AirAbility implements AddonAbility {
 
 
     private AbilityListener listener;
-    private Permission permission;
+    private Permission permission = Lunar.permission();
 
     private Location location;
     private double distancetravelled;
@@ -69,8 +69,6 @@ public class VoidSwap extends AirAbility implements AddonAbility {
 
     @Override
     public void progress() {
-
-
 
 
 
@@ -187,15 +185,13 @@ public class VoidSwap extends AirAbility implements AddonAbility {
 
         this.listener = new AbilityListener();
         ProjectKorra.plugin.getServer().getPluginManager().registerEvents(listener, ProjectKorra.plugin);
-        permission = new Permission("bending.ability.FireAbility");
-        permission.setDefault(PermissionDefault.OP);
         ProjectKorra.plugin.getServer().getPluginManager().addPermission(permission);
     }
 
     @Override
     public void stop() {
         HandlerList.unregisterAll(listener);
-        ProjectKorra.plugin.getServer().getPluginManager().removePermission(permission);
+
 
     }
 

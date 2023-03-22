@@ -27,7 +27,7 @@ public class GalacticExpansion extends AirAbility implements AddonAbility {
 
     Location sphere = player.getLocation();
     private Listener listener;
-    private Permission permission;
+    private Permission permission = Lunar.permission();
 
     private static final long COOLDOWN = 8000;
 
@@ -165,8 +165,6 @@ public class GalacticExpansion extends AirAbility implements AddonAbility {
 
         this.listener = new AbilityListener();
         ProjectKorra.plugin.getServer().getPluginManager().registerEvents(listener, ProjectKorra.plugin);
-        permission = new Permission("bending.ability.glacticexpansion");
-        permission.setDefault(PermissionDefault.OP);
         ProjectKorra.plugin.getServer().getPluginManager().addPermission(permission);
 
 
@@ -177,7 +175,6 @@ public class GalacticExpansion extends AirAbility implements AddonAbility {
     public void stop() {
 
         HandlerList.unregisterAll(listener);
-        ProjectKorra.plugin.getServer().getPluginManager().removePermission(permission);
 
     }
 

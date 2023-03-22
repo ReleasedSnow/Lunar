@@ -33,6 +33,8 @@ public class AbilityListener implements Listener {
         } else if (bound.equalsIgnoreCase("moonwalk")) {
             new MoonWalk(player);
 
+        }else if (bound.equalsIgnoreCase("solarflares")) {
+            new SolarFlares(player);
         }
         }
 
@@ -53,9 +55,7 @@ public class AbilityListener implements Listener {
 
             } else if (bound.equalsIgnoreCase("galacticexpansion")) {
                 new GalacticExpansion(player);
-            }else  if (bound.equalsIgnoreCase("cosmiccollide")) {
-                new CosmicCollide(player);
-        }
+            }
         }
     }
 }

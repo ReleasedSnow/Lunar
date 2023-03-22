@@ -31,7 +31,7 @@ public class LunarRing extends AirAbility implements AddonAbility {
 
     private double angle1;
     public static Location location;
-    private Permission permission;
+    private Permission permission = Lunar.permission();
     int yheight;
 
     private Vector direction;
@@ -67,8 +67,6 @@ public class LunarRing extends AirAbility implements AddonAbility {
     public void load() {
         this.listener = new AbilityListener();
         ProjectKorra.plugin.getServer().getPluginManager().registerEvents(listener, ProjectKorra.plugin);
-        permission = new Permission("bending.ability.LunarRing");
-        permission.setDefault(PermissionDefault.OP);
         ProjectKorra.plugin.getServer().getPluginManager().addPermission(permission);
 
     }
@@ -76,7 +74,7 @@ public class LunarRing extends AirAbility implements AddonAbility {
     @Override
     public void stop() {
         HandlerList.unregisterAll(listener);
-        ProjectKorra.plugin.getServer().getPluginManager().removePermission(permission);
+
 
 
     }
@@ -128,7 +126,7 @@ public class LunarRing extends AirAbility implements AddonAbility {
 
         if (player.getLocation().getBlockY() >= yheight) {
             player.setVelocity(new Vector(0,0,0));
-            player.setAllowFlight(true);
+            player.setAllowFlight(true);//
             player.setFlying(true);
             createBeam();
             player.setGlowing(true);

@@ -35,7 +35,7 @@ public class SunStrike extends AirAbility implements AddonAbility {
     private Listener listener;
 
     public static Location location;
-    private Permission permission;
+    private Permission permission = Lunar.permission();
 
     Location start = player.getLocation();
     private Set<Entity> hurt;
@@ -61,8 +61,6 @@ public class SunStrike extends AirAbility implements AddonAbility {
     public void load() {
         this.listener = new AbilityListener();
         ProjectKorra.plugin.getServer().getPluginManager().registerEvents(listener, ProjectKorra.plugin);
-        permission = new Permission("bending.ability.SunStrike");
-        permission.setDefault(PermissionDefault.OP);
         ProjectKorra.plugin.getServer().getPluginManager().addPermission(permission);
 
     }
@@ -70,7 +68,6 @@ public class SunStrike extends AirAbility implements AddonAbility {
     @Override
     public void stop() {
         HandlerList.unregisterAll(listener);
-        ProjectKorra.plugin.getServer().getPluginManager().removePermission(permission);
 
 
     }

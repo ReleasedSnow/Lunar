@@ -27,7 +27,7 @@ public class MoonWalk extends AirAbility implements AddonAbility {
     private final static long COOlDOWN = 7000;
 
     public Listener listener;
-    public Permission permission;
+    public Permission permission = Lunar.permission();
     private final long revert = 3000;
     Location location;
 
@@ -148,8 +148,6 @@ public class MoonWalk extends AirAbility implements AddonAbility {
     public void load() {
         this.listener = new AbilityListener();
         ProjectKorra.plugin.getServer().getPluginManager().registerEvents(listener, ProjectKorra.plugin);
-        permission = new Permission("bending.ability.platformwalker");
-        permission.setDefault(PermissionDefault.OP);
         ProjectKorra.plugin.getServer().getPluginManager().addPermission(permission);
 
     }
@@ -157,7 +155,6 @@ public class MoonWalk extends AirAbility implements AddonAbility {
     @Override
     public void stop() {
         HandlerList.unregisterAll(listener);
-        ProjectKorra.plugin.getServer().getPluginManager().removePermission(permission);
 
     }
 
