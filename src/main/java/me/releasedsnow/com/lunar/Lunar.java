@@ -37,6 +37,7 @@ public final class Lunar extends JavaPlugin {
         return element;
     }
 
+
     public static Permission permission() {
         permission = new Permission("bending.lunar");
         return permission;
