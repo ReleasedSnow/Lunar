@@ -7,9 +7,9 @@ import net.md_5.bungee.api.ChatColor;
 import org.bukkit.permissions.Permission;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public final class Lunar extends JavaPlugin {
+public class LunarElement extends JavaPlugin {
 
-    private static Lunar plugin;
+    private static LunarElement plugin;
     public static Element element;
 
     public static Permission permission;
@@ -30,12 +30,11 @@ public final class Lunar extends JavaPlugin {
                 return ChatColor.of("#8B62F3");
             }
         };
+
+        new ConfigManager();
         System.out.println("Lunar has begun");
     }
 
-    public static Element ele() {
-        return element;
-    }
 
 
     public static Permission permission() {
@@ -46,7 +45,7 @@ public final class Lunar extends JavaPlugin {
     }
 
 
-    private static Lunar getPlugin() {
+    public static LunarElement getPlugin() {
         return plugin;
     }
 

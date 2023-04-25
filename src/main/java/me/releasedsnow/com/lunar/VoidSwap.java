@@ -14,7 +14,7 @@ import org.bukkit.entity.Mob;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.permissions.Permission;
-import org.bukkit.permissions.PermissionDefault;
+
 import org.bukkit.util.Vector;
 
 import java.util.HashSet;
@@ -32,7 +32,7 @@ public class VoidSwap extends AirAbility implements AddonAbility {
 
 
     private AbilityListener listener;
-    private Permission permission = Lunar.permission();
+    private final Permission permission = LunarElement.permission();
 
     private Location location;
     private double distancetravelled;
@@ -145,7 +145,7 @@ public class VoidSwap extends AirAbility implements AddonAbility {
     }
     @Override
     public Element getElement() {
-        return Lunar.ele();
+        return LunarElement.element;
     }
 
     @Override

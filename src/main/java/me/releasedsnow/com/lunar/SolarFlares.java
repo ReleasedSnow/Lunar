@@ -32,7 +32,7 @@ public class SolarFlares extends FireAbility implements AddonAbility {
 
 
    private Listener listener;
-    private final Permission permission = Lunar.permission();
+    private final Permission permission = LunarElement.permission();
     private static final long COOLDOWN = 5000;
 
     public SolarFlares(Player player) {
@@ -142,7 +142,7 @@ public class SolarFlares extends FireAbility implements AddonAbility {
 
     @Override
     public Element getElement() {
-        return Lunar.ele();
+        return LunarElement.element;
     }
 
     @Override

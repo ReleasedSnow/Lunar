@@ -27,7 +27,7 @@ public class GalacticExpansion extends AirAbility implements AddonAbility {
 
     Location sphere = player.getLocation();
     private Listener listener;
-    private Permission permission = Lunar.permission();
+    private Permission permission = LunarElement.permission();
 
     private static final long COOLDOWN = 8000;
 
@@ -186,7 +186,7 @@ public class GalacticExpansion extends AirAbility implements AddonAbility {
 
     @Override
     public Element getElement() {
-        return Lunar.ele();
+        return LunarElement.element;
     }
 
     @Override

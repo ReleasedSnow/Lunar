@@ -31,7 +31,7 @@ public class LunarRing extends AirAbility implements AddonAbility {
 
     private double angle1;
     public static Location location;
-    private Permission permission = Lunar.permission();
+    private Permission permission = LunarElement.permission();
     int yheight;
 
     private Vector direction;
@@ -147,7 +147,7 @@ public class LunarRing extends AirAbility implements AddonAbility {
         long runningTime = System.currentTimeMillis() - getStartTime();
 
         if(runningTime >= duration) {
-            player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_FALLING, 50, 0 ));
+            player.setFallDistance(0f);
 
 
             player.setGlowing(false);
@@ -226,7 +226,7 @@ public class LunarRing extends AirAbility implements AddonAbility {
 
     @Override
     public Element getElement () {
-        return Lunar.ele();
+        return LunarElement.element;
     }
 
     @Override

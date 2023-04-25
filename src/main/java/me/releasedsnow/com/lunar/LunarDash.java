@@ -28,7 +28,7 @@ public class LunarDash extends EarthAbility implements AddonAbility {
     private static final long COOLDOWN = 8000;
 
     private Listener listener;
-    private Permission permission = Lunar.permission();
+    private Permission permission = LunarElement.permission();
 
 
     private double angle;
@@ -84,6 +84,7 @@ public class LunarDash extends EarthAbility implements AddonAbility {
         if (height <= player.getLocation().getBlockY()) {
             player.playSound(player.getLocation(), Sound.BLOCK_GLASS_BREAK, 3, 3);
             player.setVelocity(direction);
+            player.setFallDistance(0f);
             player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 100,  5));
             remove();
             return;
@@ -149,7 +150,7 @@ public class LunarDash extends EarthAbility implements AddonAbility {
 
     @Override
     public Element getElement() {
-        return Lunar.ele();
+        return LunarElement.element;
     }
 
     @Override

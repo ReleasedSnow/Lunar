@@ -27,7 +27,7 @@ public class MoonWalk extends AirAbility implements AddonAbility {
     private final static long COOlDOWN = 7000;
 
     public Listener listener;
-    public Permission permission = Lunar.permission();
+    public Permission permission = LunarElement.permission();
     private final long revert = 3000;
     Location location;
 
@@ -136,7 +136,7 @@ public class MoonWalk extends AirAbility implements AddonAbility {
 
     @Override
     public Element getElement() {
-        return Lunar.ele();
+        return LunarElement.element;
     }
 
     @Override

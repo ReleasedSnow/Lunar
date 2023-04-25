@@ -7,17 +7,16 @@ import com.projectkorra.projectkorra.ability.AddonAbility;
 import com.projectkorra.projectkorra.ability.AirAbility;
 import com.projectkorra.projectkorra.util.DamageHandler;
 import com.projectkorra.projectkorra.util.TempBlock;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.Particle;
-import org.bukkit.Sound;
+import org.bukkit.*;
 import org.bukkit.block.Block;
+import org.bukkit.boss.BarColor;
+import org.bukkit.boss.BarStyle;
+import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.permissions.Permission;
-import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
@@ -35,12 +34,10 @@ public class SunStrike extends AirAbility implements AddonAbility {
     private Listener listener;
 
     public static Location location;
-    private Permission permission = Lunar.permission();
+    private final Permission permission = LunarElement.permission();
 
     Location start = player.getLocation();
     private Set<Entity> hurt;
-
-
 
 
     public SunStrike(Player player) {
@@ -49,9 +46,6 @@ public class SunStrike extends AirAbility implements AddonAbility {
         if (!bPlayer.canBend(this)) return;
 
         hurt = new HashSet<>();
-
-
-        bPlayer.addCooldown(this);
 
 
         start();
@@ -96,54 +90,59 @@ public class SunStrike extends AirAbility implements AddonAbility {
 
 
         }
-        double above = player.getEyeLocation().getBlockY() + 5;
-        double side = player.getEyeLocation().getBlockX();
-        double side1 = player.getEyeLocation().getBlockZ();
-        sphere.setY(above);
-        sphere.setX(side);
-        sphere.setZ(side1);
 
-        for (double i = 0; i <= Math.PI; i += Math.PI / 10) {
-            double radius = Math.sin(i);
-            double y = Math.cos(i);
-            for (double a = 0; a < Math.PI * 2; a+= Math.PI / 10) {
-                double x = Math.cos(a) * radius;
-                double z = Math.sin(a) * radius;
-                sphere.add(x, y, z);
-                if (ThreadLocalRandom.current().nextInt(4) == 0) {
-                    GeneralMethods.displayColoredParticle("e6a638", sphere, 1, 0.25, 0.25, 0.25);
-                    GeneralMethods.displayColoredParticle("e67538", sphere, 1, 0.25, 0.25, 0.25);
+        if (player.isSneaking()) {
+
+
+            double above = player.getEyeLocation().getBlockY() + 5;
+            double side = player.getEyeLocation().getBlockX();
+            double side1 = player.getEyeLocation().getBlockZ();
+            sphere.setY(above);
+            sphere.setX(side);
+            sphere.setZ(side1);
+
+            for (double i = 0; i <= Math.PI; i += Math.PI / 10) {
+                double radius = Math.sin(i);
+                double y = Math.cos(i);
+                for (double a = 0; a < Math.PI * 2; a += Math.PI / 10) {
+                    double x = Math.cos(a) * radius;
+                    double z = Math.sin(a) * radius;
+                    sphere.add(x, y, z);
+                    if (ThreadLocalRandom.current().nextInt(4) == 0) {
+                        GeneralMethods.displayColoredParticle("e6a638", sphere, 1, 0.25, 0.25, 0.25);
+                        GeneralMethods.displayColoredParticle("e67538", sphere, 1, 0.25, 0.25, 0.25);
+                    }
+                    sphere.subtract(x, y, z);
                 }
-                sphere.subtract(x, y, z);
             }
-        }
-        start = player.getLocation();
-        start.setY(above);
-        createBeam();
 
 
+            start = player.getLocation();
+            start.setY(above);
+            createBeam();
 
 
-        long duration = 3000;
-        long runningTime = System.currentTimeMillis() - getStartTime();
+            if (ThreadLocalRandom.current().nextInt(500) == 0) {
+                player.playSound(player.getLocation(), Sound.BLOCK_BAMBOO_PLACE, 3, 3);
+            }
 
-        if(runningTime >= duration) {
-            bPlayer.addCooldown(this);
+        }else{
             remove();
-            return;
 
         }
-
-
-
-
-
-
-        if (ThreadLocalRandom.current().nextInt(500) == 0) {
-            player.playSound(player.getLocation(), Sound.BLOCK_BAMBOO_PLACE, 3, 3);
-        }
-
     }
+
+
+
+
+
+
+
+
+
+
+
+
 
     public void createBeam() {
         Vector direction = player.getLocation().getDirection();
@@ -209,7 +208,7 @@ public class SunStrike extends AirAbility implements AddonAbility {
 
     @Override
     public Element getElement () {
-        return Lunar.ele();
+        return LunarElement.element;
     }
 
     @Override
